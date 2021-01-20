@@ -1,6 +1,6 @@
 def dockerImage = 'sampletest19/reactapp-pipeline'
 pipeline{
-    agent slave1
+    agent {label 'slave1'}
     stages{
         stage("Docker build"){
             steps{
