@@ -9,9 +9,10 @@ pipeline{
         }  
         stage("Docker push"){
             steps{
-                withDockerRegistry(credentialsId: 'DockerRegistry', url: 'https://registry.hub.docker.com') {
-                         sh "docker push sampletest19/reactapp-pipeline:${BUILD_NUMBER}"
-                }    
+                withCredentials([string(credentialsId: 'DockerHub', variable: 'DockerHubPwd')]) {
+                    sh "docker login -u sampletest19 -p ${DockerHubPwd}"
+                }
+                sh "docker push sampletest19/reactapp-pipeline:${BUILD_NUMBER}"
             }
         }
     }
