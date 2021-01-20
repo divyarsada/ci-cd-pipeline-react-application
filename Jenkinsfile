@@ -7,10 +7,11 @@ pipeline{
                 script {
                     dockerImage = docker.build dockerImage + ":$BUILD_NUMBER"
                 }
-          
+            }
+        }  
         stage("Docker push"){
             steps{
-                docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
+                docker.withRegistry('https://registry.hub.docker.com', DockerRegistry) {
                 dockerImage.push()   
                 }
             }
