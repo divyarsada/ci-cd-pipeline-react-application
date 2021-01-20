@@ -3,16 +3,15 @@ pipeline{
     agent any
     stages{
         stage("Docker build"){
-            steps {
-                script {
-                    dockerImage = docker.build dockerImage + ":$BUILD_NUMBER"
+            steps{
+                sh "docker build . -t dockerImage:$BUILD_NUMBER"
                 }
             }
         }  
         stage("Docker push"){
             steps{
                 withDockerRegistry(credentialsId: 'DockerRegistry', url: 'https://registry.hub.docker.com') {
-                dockerImage.push()
+                         sh "docker push dockerImage:$BUILD_NUMBER"
                 }    
             }
         }
