@@ -6,7 +6,6 @@ pipeline{
             steps{
                 sh "docker build . -t dockerImage:$BUILD_NUMBER"
                 }
-            }
         }  
         stage("Docker push"){
             steps{
