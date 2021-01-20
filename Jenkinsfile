@@ -12,7 +12,7 @@ pipeline{
         stage("Docker push"){
             steps{
                 withDockerRegistry(credentialsId: 'DockerRegistry', url: 'https://registry.hub.docker.com') {
-                docker push dockerImage
+                dockerImage.push()
                 }    
             }
         }
