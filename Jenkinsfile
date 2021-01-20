@@ -15,5 +15,10 @@ pipeline{
                 sh "docker push sampletest19/reactapp-pipeline:${BUILD_NUMBER}"
             }
         }
+        stage("Deploy containerto ec2-instance"){
+           steps{
+               ansiblePlaybook credentialsId: 'ec2', disableHostKeyChecking: true, extras: "-e BUILD_NUMBER=${BUILD_NUMBER}", installation: 'ansible', inventory: 'react.inv', playbook: 'deploy-docker.yml'
+           }
+        }
     }
 }
