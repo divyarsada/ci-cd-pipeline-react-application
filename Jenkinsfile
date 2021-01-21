@@ -17,7 +17,11 @@ pipeline{
         }
         stage("Deploy to Kubernetes EKS Cluster"){
             steps{
-                kubernetesDeploy configs: 'reactApplication.yml', kubeConfig: [path: ''], kubeconfigId: 'Kubernetes_Cluster', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+                kubernetesDeploy(
+                    configs: 'reactApplication.yml', 
+                    kubeconfigId: 'Kubernetes_Cluster',
+                    enableConfigSubstitution: true
+                )
             }
         }
     }
