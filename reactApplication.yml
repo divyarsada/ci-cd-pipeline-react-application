@@ -37,6 +37,6 @@ spec:
     spec:
       containers:
       - name: sample-reactapp
-        image: sampletest19/reactapp-pipeleine:$(BUILD_NUMBER)
+        image: "sampletest19/reactapp-pipeleine:${BUILD_NUMBER}"
         ports:
         - containerPort: 3000
